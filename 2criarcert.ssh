@@ -1,0 +1,57 @@
+cd /root/ca
+openssl genrsa \
+-aes256 \
+-out intermediate/private/intermediate.key.pem \
+4096
+chmod 400 intermediate/private/intermediate.key.pem
+#o próximo comando vai criar um pedido de certificado
+openssl req \
+-config intermediate/openssl.cnf \
+-new \
+-sha256 \
+-key intermediate/private/intermediate.key.pem \
+-out intermediate/csr/intermediate.csr.pem
+#o próximo comando vai transformar o pedido de certificado em certificado digital assinado pela CA raiz
+openssl ca \
+-config openssl.cnf \
+-extensions v3_intermediate_ca \
+-days 3650 \
+-notext \
+-md sha256 \
+-in intermediate/csr/intermediate.csr.pem \
+-out intermediate/certs/intermediate.cert.pem
+chmod 444 intermediate/certs/intermediate.cert.pem
+mkdir /root/server_cert
+openssl genrsa \
+-aes256 \
+-out /root/server_cert/www.example.com.key.pem \
+2048
+chmod 400 /root/server_cert/www.example.com.key.pem
+
+echo "	comon = www.example.com
+    email = iuri.nunes@ipcbcampus.pt"
+
+openssl req \
+-config intermediate/openssl.cnf \
+-key /root/server_cert/www.example.com.key.pem \
+-new \
+-sha256 \
+-out /root/server_cert/www.example.com.csr.pem
+
+echo "acrescentar ca/intermediate/openssl.cnf
+
+[ server_cert ]
+# Extensions for server certificates (`man x509v3_config`).
+basicConstraints = CA:FALSE
+nsCertType = server
+nsComment = "OpenSSL Generated Server Certificate"
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer:always
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+
+
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = www.example.com
+"

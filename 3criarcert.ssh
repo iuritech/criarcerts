@@ -1,0 +1,17 @@
+cd /root/ca
+openssl ca \
+-config intermediate/openssl.cnf \
+-extensions server_cert \
+-days 365 \
+-notext \
+-md sha256 \
+-in /root/server_cert/www.example.com.csr.pem \
+-out /root/server_cert/www.example.com.cert.pem
+chmod 444 /root/server_cert/www.example.com.cert.pem
+
+cat \
+/root/server_cert/www.example.com.cert.pem \
+/root/ca/intermediate/certs/intermediate.cert.pem \
+/root/ca/certs/ca.cert.pem \
+> /root/server_cert/server-chain.cert.pem
+chmod 444 /root/server_cert/server-chain.cert.pem

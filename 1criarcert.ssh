@@ -1,0 +1,42 @@
+mkdir /root/ca
+cd /root/ca
+mkdir certs crl newcerts private
+chmod 700 private
+touch index.txt
+echo 1000 > serial
+cp /root/ciber/openssl.cnf /root/ca
+cd /root/ca
+openssl genrsa \
+-aes256 \
+-out private/ca.key.pem \
+4096
+chmod 400 private/ca.key.pem
+echo "	Autoridade Raiz"
+echo "	iuri.nunes@ipcbcampus.pt"
+openssl req \
+-config openssl.cnf \
+-key private/ca.key.pem \
+-new \
+-x509 \
+-days 7300 \
+-sha256 \
+-extensions v3_ca \
+-out certs/ca.cert.pem 
+chmod 444 certs/ca.cert.pem
+mkdir /root/ca/intermediate
+cd /root/ca/intermediate
+mkdir certs crl csr newcerts private
+chmod 700 private
+touch index.txt
+echo 2000 > serial
+echo 2000 > /root/ca/intermediate/crlnumber
+cp /root/ca/openssl.cnf /root/ca/intermediate
+echo "Edite o ficheiro de configuração /root/ca/intermediate/openssl.cnf e altere os seguintes campos,
+mantendo os outros inalterados:
+[ CA_default ]
+dir = /root/ca/intermediate
+private_key = $dir/private/intermediate.key.pem
+certificate = $dir/certs/intermediate.cert.pem
+crl = $dir/crl/intermediate.crl.pem
+policy = policy_loose"
+
