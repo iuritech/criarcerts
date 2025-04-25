@@ -1,13 +1,17 @@
 # guia
 
+1- entrar em super user na pasta /root
+
     su
     cd
 
-1-
+2- criar certificados "Autoridade Raiz"
+
+    mail= iuri.nunes@ipcbcampus.pt
 
     bash ciber/1criarcert.ssh  
 
-2-
+3- Adicionar server sert e alterar os campos 
 
     vi /root/ca/intermediate/openssl.cnf
 
@@ -15,8 +19,6 @@
 
     crt+r
     "
-
-3- #Adicionar server sert e alterar os campos 
 
     server_cert
     subjectAltName = @alt_names
@@ -29,7 +31,7 @@
     crl 	 	  = $dir/crl/intermediate.crl.pem
     policy 	  	  = policy_loose
 
-4-
+5- Criar cert "Autoridade Intermedia" e cert server "www.simoes.com"
 
     bash ciber/2criarcert.ssh  
 
