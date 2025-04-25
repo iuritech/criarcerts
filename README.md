@@ -18,8 +18,8 @@ email = iuri.nunes@ipcbcampus.pt
 
 #macros pesquisar yy
 
-    crt+r
-    "
+crt+r
+"
 
     server_cert
     subjectAltName = @alt_names
