@@ -4,9 +4,11 @@
     cd
 
 1-
+
     bash ciber/1criarcert.ssh  
 
 2-
+
     vi /root/ca/intermediate/openssl.cnf
 
 #macros pesquisar yy
