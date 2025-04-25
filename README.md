@@ -14,8 +14,8 @@
     crt+r
     "
 
-3-
-    #Adicionar server sert e alterar os campos 
+3- #Adicionar server sert e alterar os campos 
+
     server_cert
     subjectAltName = @alt_names
     [alt_names]
