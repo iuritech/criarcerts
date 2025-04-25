@@ -6,7 +6,7 @@
     cd
 
 2- criar certificados "Autoridade Raiz"
-mail= iuri.nunes@ipcbcampus.pt
+mail= "iuri.nunes@ipcbcampus.pt"
 
     bash ciber/1criarcert.ssh  
 
