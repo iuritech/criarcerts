@@ -1,5 +1,7 @@
 # guia
 
+email = iuri.nunes@ipcbcampus.pt
+
 1- entrar em super user na pasta /root
 
     su
@@ -7,7 +9,6 @@
 
 2- criar certificados "Autoridade Raiz"
 
-mail= iuri.nunes@ipcbcampus.pt
 
     bash ciber/1criarcert.ssh  
 
@@ -34,6 +35,3 @@ mail= iuri.nunes@ipcbcampus.pt
 5- Criar cert "Autoridade Intermedia" e cert server "www.simoes.com"
 
     bash ciber/2criarcert.ssh  
-
-    comon = www.simoes.com
-    email = iuri.nunes@ipcbcampus.pt
