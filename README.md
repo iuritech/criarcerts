@@ -25,11 +25,11 @@ crt+r "
     [alt_names]
     DNS.1 = www.simoes.com
 
-    dir 		  = /root/ca/intermediate
-    private_key 	  = $dir/private/intermediate.key.pem
-    certificate 	  = $dir/certs/intermediate.cert.pem
-    crl 	 	  = $dir/crl/intermediate.crl.pem
-    policy 	  	  = policy_loose
+    dir               = /root/ca/intermediate
+    private_key       = $dir/private/intermediate.key.pem
+    certificate       = $dir/certs/intermediate.cert.pem
+    crl               = $dir/crl/intermediate.crl.pem
+    policy            = policy_loose
 
 5- Criar cert "Autoridade Intermedia" e cert server "www.simoes.com"
 
